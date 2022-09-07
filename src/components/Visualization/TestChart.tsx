@@ -1,20 +1,20 @@
+/* eslint-disable max-lines-per-function */
 /* eslint-disable no-magic-numbers */
 import React, { FC } from 'react'
+import 'd3-transition'
 
 import { useChartDimensions } from '../../hooks/useChartDimensions'
 import { useScales } from '../../hooks/useScales'
 import { DataPoint } from '../../types/visualization/DataPoint'
 
-import { Axes } from './Axes/Axes'
 import { BarChart } from './BarChart/BarChart'
 import { GroupGraph } from './SVGChartContainer/GroupGraph'
 import { SVGChartContainer } from './SVGChartContainer/SVGChartContainer'
 import styles from './TestChart.module.css'
-import { Trendline } from './Trendline/Trendline'
 
 const data: DataPoint[] = [
   ['x', 50],
-  ['a', 20],
+  ['a', 10],
   ['b', 90],
   ['c', 60],
   ['d', 110],
@@ -38,9 +38,10 @@ export const TestChart: FC = () => {
     <>
       <SVGChartContainer divRef={ref} className={styles.container}>
         <GroupGraph margins={margins}>
-          <BarChart data={data} scales={scales} />
-          <Trendline data={data} scales={scales} />
-          <Axes graph={graph} scales={scales} />
+          {/* TODO refactor into wrapper */}
+          {!!graph.height && (
+            <BarChart data={data} graph={graph} scales={scales} />
+          )}
         </GroupGraph>
       </SVGChartContainer>
     </>

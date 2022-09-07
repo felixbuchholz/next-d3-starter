@@ -8,9 +8,12 @@ export type UseScales = (
   options?: UseScalesOptions
 ) => UseScalesReturn
 
+export type ScaleY = ScaleLinear<number, number>
+export type ScaleX = ScaleBand<string>
+
 export type UseScalesReturn = {
-  x: ScaleBand<string>
-  y: ScaleLinear<number, number>
+  x: ScaleX
+  y: ScaleY
 }
 type UseScalesProps = {
   data: DataPoint[]

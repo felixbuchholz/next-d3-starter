@@ -1,5 +1,5 @@
 import debounce from 'lodash.debounce'
-import { useEffect, useRef, useState, useMemo } from 'react'
+import { useRef, useState, useMemo, useEffect } from 'react'
 
 import {
   OnResize,

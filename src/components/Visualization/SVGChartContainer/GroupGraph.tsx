@@ -7,14 +7,12 @@ export const GroupGraph: FCC<
   { margins: ChartDimensions['margins'] } & SVGAttributes<SVGGElement>
 > = ({ children, margins, ...gAttributes }) => {
   return (
-    <svg>
-      <g
-        {...gAttributes}
-        transform={`translate(${margins.left}, ${margins.top})`}
-        data-testid="groupGraph"
-      >
-        {children}
-      </g>
-    </svg>
+    <g
+      {...gAttributes}
+      transform={`translate(${margins.left}, ${margins.top})`}
+      data-testid="groupGraph"
+    >
+      {children}
+    </g>
   )
 }
