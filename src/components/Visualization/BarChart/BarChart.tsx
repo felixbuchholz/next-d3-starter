@@ -45,9 +45,10 @@ export const createBarChart = ({
     .selectAll<SVGRectElement, DataPoint>('rect')
     .data<DataPoint>(data, d => d[dataPointXIndex])
     .join(
-      enter => joinEnter(enter, graph),
+      enter => joinEnter(enter, graph, scales.y),
       update => joinUpdate(update, scales.y)
     )
+
     .attr('x', d => getX(d, scales.x))
     .attr('width', () => width)
 
@@ -56,12 +57,17 @@ export const createBarChart = ({
 
 const joinEnter = (
   enter: Selection<EnterElement, DataPoint, BaseType, unknown>,
-  graph: Dimensions
-): Selection<SVGRectElement, DataPoint, BaseType, unknown> => {
+  graph: Dimensions,
+  scale: ScaleY
+): Transition<SVGRectElement, DataPoint, BaseType, unknown> => {
   return enter
     .append('rect')
     .attr('y', graph.height)
     .attr('height', heightInitial)
+    .transition()
+    .duration(transitionDuration)
+    .attr('y', d => getY(d, scale))
+    .attr('height', d => getHeight(d, scale))
 }
 
 const joinUpdate = (
